@@ -65,8 +65,4 @@ public class BinarySearchTreeTest {
         BST.remove(14);
         BST.remove(6);
     }
-
-    @org.junit.Test
-    public void nextElem() {
-    }
 }
