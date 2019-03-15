@@ -3,10 +3,10 @@ import java.util.*;
 
 public class BinarySearchTree {
         public class Node {  //Узел дерева. Хранит информацию о предке, левом и правом потомках
-            int key;
-            Node parent;
-            Node left;
-            Node right;
+            private int key;
+            private Node parent;
+            private Node left;
+            private Node right;
 
             Node (int key) {
                 this.key = key;
@@ -18,8 +18,6 @@ public class BinarySearchTree {
 
 
         Node root = null;  //Корень дерева
-
-       ArrayList<Integer> treeAsList= new ArrayList();
 
         public boolean search( int data ) {  //Поиск в дереве
             Node find = root;
@@ -40,8 +38,6 @@ public class BinarySearchTree {
         public void add(int insert) {  //Добавление в дерево
             if (search(insert) == true) throw new IllegalArgumentException(); //Пытаемся добавить в дерево существующий элемент
             Node insertNode = new Node(insert);
-
-            treeAsList.add(insert);
 
             if (root == null) {  //Если дерево пустое
                 root = insertNode;
@@ -68,7 +64,7 @@ public class BinarySearchTree {
         }
 
 
-        public ArrayList<Integer> neighbors (int elementKey) { //Выводит информацию о предке и потомках
+        public List<Integer> neighbors (int elementKey) { //Выводит информацию о предке и потомках
             if (search(elementKey) == false) throw new IllegalArgumentException(); //Пытаемся посмотреть соседей у несуществующего элемента
 
             Node element = null;
@@ -79,7 +75,7 @@ public class BinarySearchTree {
                 else r = r.right;
             }
 
-            ArrayList<Integer> parentAndChildren = new ArrayList<Integer>();
+            List<Integer> parentAndChildren = new ArrayList<Integer>();
 
             if (element.parent != null) parentAndChildren.add(element.parent.key);
             if (element.left != null) parentAndChildren.add(element.left.key);
@@ -90,13 +86,6 @@ public class BinarySearchTree {
 
         public void remove (int deleteKey){ //Удаление элемента
             if (search(deleteKey) == false) throw new IllegalArgumentException(); //Пытаемся удалить из дерева не существующий элемент
-
-            int number = 0;
-            for (int i = 0; i < treeAsList.size(); i++){
-                if (treeAsList.get(i) == deleteKey) number = i;
-            }
-
-            treeAsList.remove(number);
 
             Node delete = null;
             Node r = root;
@@ -149,4 +138,15 @@ public class BinarySearchTree {
             return next;
         }
 
+
+
+        public List<Integer> treeAsList(Node node) { //Складывает узлы дерева в лист в отсортированном порядке
+            List<Integer> list = new ArrayList<Integer>();
+            if (node != null) {
+                list.add(node.key);
+                treeAsList(node.left);
+                treeAsList(node.right);
+            }
+            return list;
+        }
 }
