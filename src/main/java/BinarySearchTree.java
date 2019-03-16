@@ -17,7 +17,7 @@ public class BinarySearchTree {
         }
 
 
-        Node root = null;  //Корень дерева
+        private Node root = null;  //Корень дерева
 
         public boolean search( int data ) {  //Поиск в дереве
             Node find = root;
@@ -36,7 +36,7 @@ public class BinarySearchTree {
 
 
         public void add(int insert) {  //Добавление в дерево
-            if (search(insert) == true) throw new IllegalArgumentException(); //Пытаемся добавить в дерево существующий элемент
+            if (search(insert)) throw new IllegalArgumentException(); //Пытаемся добавить в дерево существующий элемент
             Node insertNode = new Node(insert);
 
             if (root == null) {  //Если дерево пустое
@@ -65,7 +65,7 @@ public class BinarySearchTree {
 
 
         public List<Integer> neighbors (int elementKey) { //Выводит информацию о предке и потомках
-            if (search(elementKey) == false) throw new IllegalArgumentException(); //Пытаемся посмотреть соседей у несуществующего элемента
+            if (!search(elementKey)) throw new IllegalArgumentException(); //Пытаемся посмотреть соседей у несуществующего элемента
 
             Node element = null;
             Node r = root;
@@ -85,7 +85,7 @@ public class BinarySearchTree {
 
 
         public void remove (int deleteKey){ //Удаление элемента
-            if (search(deleteKey) == false) throw new IllegalArgumentException(); //Пытаемся удалить из дерева не существующий элемент
+            if (!search(deleteKey)) throw new IllegalArgumentException(); //Пытаемся удалить из дерева не существующий элемент
 
             Node delete = null;
             Node r = root;
@@ -140,13 +140,20 @@ public class BinarySearchTree {
 
 
 
-        public List<Integer> treeAsList(Node node) { //Складывает узлы дерева в лист в отсортированном порядке
-            List<Integer> list = new ArrayList<Integer>();
+        private List<Integer> treeAsList(Node node, List<Integer> list) { //Складывает узлы дерева в лист в отсортированном порядке
             if (node != null) {
                 list.add(node.key);
-                treeAsList(node.left);
-                treeAsList(node.right);
+                treeAsList(node.left, list);
+                treeAsList(node.right, list);
             }
             return list;
         }
+
+
+
+        public List<Integer> toList() {
+            List<Integer> list = new ArrayList<Integer>();
+            return treeAsList(root, list);
+    }
+
 }

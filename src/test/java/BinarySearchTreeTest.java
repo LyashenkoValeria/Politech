@@ -46,7 +46,7 @@ public class BinarySearchTreeTest {
                 BST.add(1);
             }
         });
-        assertEquals(BST1.treeAsList(BST1.root), BST.treeAsList(BST.root));
+        assertEquals(BST1.toList(), BST.toList());
     }
 
     @org.junit.Test
@@ -79,7 +79,7 @@ public class BinarySearchTreeTest {
         BSTWithRemove.add(10);
         BSTWithRemove.add(14);
         BST.remove(13);
-        assertEquals(BSTWithRemove.treeAsList(BSTWithRemove.root), BST.treeAsList(BST.root));
+        assertEquals(BSTWithRemove.toList(), BST.toList());
 
         BinarySearchTree BSTWithRemove1 = new BinarySearchTree();
         BSTWithRemove1.add(8);
@@ -92,7 +92,7 @@ public class BinarySearchTreeTest {
         BSTWithRemove1.add(12);
         BST.add(12);
         BST.remove(14);
-        assertEquals(BSTWithRemove1.treeAsList(BSTWithRemove.root), BST.treeAsList(BST.root));
+        assertEquals(BSTWithRemove1.toList(), BST.toList());
 
         BinarySearchTree BSTWithRemove2 = new BinarySearchTree();
         BSTWithRemove2.add(8);
@@ -103,6 +103,6 @@ public class BinarySearchTreeTest {
         BSTWithRemove2.add(10);
         BSTWithRemove2.add(12);
         BST.remove(6);
-        assertEquals(BSTWithRemove2.treeAsList(BSTWithRemove.root), BST.treeAsList(BST.root));
+        assertEquals(BSTWithRemove2.toList(), BST.toList());
     }
 }
